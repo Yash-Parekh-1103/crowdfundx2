@@ -9,18 +9,10 @@ const page = () => {
 
     useEffect(() => {
         
-        if(!isLoaded) return 
-        console.log(email);
-        
-
+      if(!isLoaded) return 
+      console.log(email);
 
     }, [isLoaded,email])
-    
-
-
-
-
-
 
   return (
     <div>
