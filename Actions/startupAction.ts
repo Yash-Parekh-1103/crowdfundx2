@@ -38,10 +38,27 @@ export const fetchAllStartup = async () => {
 
 // }
     
+export const fetchSinglestartup = async (id:number) => {
 
-//backend to fetch single startup by id
-export const singleStartup = async (id: number) => {
-  const result = await db.select().from(startupTable).where(eq(startupTable.id, id))
-  return result[0] ?? null
+  console.log(id);
+
+  const startup =  await db.select().from(startupTable).where(eq(startupTable.id,id))
+
+  console.log(startup);
+
+  return startup;
+  
+
 }
 
+
+//to update single startup
+
+export const updateSingleST = async (id:number,data:NewStartup) => {
+
+  // console.log(id , data);
+
+  await db.update(startupTable).set(data).where(eq(startupTable.id,id))
+  
+  
+}
