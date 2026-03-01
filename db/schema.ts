@@ -13,3 +13,21 @@ export const startupTable = pgTable("startup", {
 
 export type Startup =  typeof startupTable.$inferSelect
 export type NewStartup =  typeof startupTable.$inferInsert
+
+
+export const paymentTable = pgTable("payment", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  email: varchar().notNull(),
+  startup_id: integer().notNull(),
+  creditCard_num: integer(),
+  holder_name: varchar(),
+  cvv:integer(),
+  upi_id:varchar(),
+  quantity:integer().default(1),
+  amount:integer().notNull()
+
+});
+
+
+export type Payment =  typeof paymentTable.$inferSelect
+export type NewPayment =  typeof paymentTable.$inferInsert

@@ -44,6 +44,7 @@ const page = () => {
         <p>${singleStartup.singleFund}</p>
         <p>${singleStartup.totalTarget}</p>
         <a href={`./update/${singleStartup.id}`}>update  </a>
+        <a href={`./payment/${singleStartup.id}`}>Buy  </a>
         </div>
         }
     </div>

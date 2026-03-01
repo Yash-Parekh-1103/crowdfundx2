@@ -4,6 +4,9 @@ import { NewStartup } from "@/db/schema"
 import { useCurrentUser } from "@/hooks/useUser"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+
 
 const page = () => {
 
@@ -15,6 +18,7 @@ const page = () => {
   } = useForm<NewStartup>()
 
   const { email, isLoaded } = useCurrentUser()
+
 
   //this is for navigation to root when new ST will be created
   const router = useRouter()
@@ -36,27 +40,39 @@ const page = () => {
 
 
   }
+
+
+
+  
+
+
+
+
   return (
     <div>
 
-      <form onSubmit={handleSubmit(OnSubmit)}>
+      <form onSubmit={handleSubmit(OnSubmit)} className="flex flex-col gap-3">
 
-        <input {...register("name", { required: true })} placeholder="Name" className="border-2 border-black" />
+        <Input {...register("name", { required: true })} placeholder="Name" className="w-xl" />
         {errors.name && <span>This field is required</span>}
 
-        <input {...register("description", { required: true })} placeholder="Description" className="border-2 border-black" />
+        <Input {...register("description", { required: true })} placeholder="Description"  className="w-xl" />
         {errors.description && <span>This field is required</span>}
 
-        <input {...register("img", { required: true })} placeholder="Image URL" className="border-2 border-black" />
+        <Input {...register("img", { required: true })} placeholder="Image URL"  className="w-xl" />
         {errors.img && <span>This field is required</span>}
 
-        <input type="number" {...register("singleFund", { required: true })} placeholder="Single Fund Amount" className="border-2 border-black" />
-        {errors.singleFund && <span>This field is required</span>}
+    <div className="flex w-xl gap-2">
 
-        <input type="number" {...register("totalTarget", { required: true })} placeholder="Total Target" className="border-2 border-black" />
-        {errors.totalTarget && <span>This field is required</span>}
+        <Input type="number" defaultValue={1} {...register("singleFund", { required: true, min: { value: 1, message: "Single fund must be a positive number" } })} placeholder="Single Fund Amount"    />
+        {errors.singleFund && <span>{errors.singleFund.message || "This field is required"} </span>}
 
-        <input type="submit" />
+        <Input type="number" {...register("totalTarget", { required: true,  min: { value: 1, message: "Total fund must be a positive number" }  } )} placeholder="Total Target"  />
+        {errors.totalTarget && <span>{errors.totalTarget.message}</span>}
+
+    </div>
+
+        <Button type="submit" className="w-20 p-2 m-5">Submit</Button>
       </form>
 
     </div>
